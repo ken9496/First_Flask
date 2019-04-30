@@ -1,18 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    signed_in = True  # we are hardcoding this just to demonstrate how we can do conditionals in our template files
-    return render_template('index.html', signed_in=signed_in)
+    first_name = request.args.get('first_name')
+    last_name = request.args.get('last_name')
+    return render_template('index.html', first_name=first_name,  last_name=last_name)
 
 
 @app.route("/contact")
 def contact():
-    signed_in = True  # we are hardcoding this just to demonstrate how we can do conditionals in our template files
-    return render_template('contact.html', signed_in=signed_in)
+    return render_template('contact.html')
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
